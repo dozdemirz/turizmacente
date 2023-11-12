@@ -48,7 +48,7 @@ public class AdminGUI extends JFrame {
         setVisible(true);
 
 
-        //User List
+        //Kullanıcı listesi
         mdl_userlist = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -83,6 +83,7 @@ public class AdminGUI extends JFrame {
             loadUserModel(filter);
         });
 
+        //Kullanıcı eklemek için
         btn_add.addActionListener(e -> {
             if (Helper.isFieldEmpty(fld_add_name) || Helper.isFieldEmpty(fld_add_uname) || Helper.isFieldEmpty(fld_add_password)) {
                 Helper.showMsg("fill");
@@ -105,6 +106,7 @@ public class AdminGUI extends JFrame {
         });
 
 
+        //Kullanıcı silmek için
         btn_delete.addActionListener(e -> {
             if (Helper.isFieldEmpty(fld_delete_id)) {
                 Helper.showMsg("fill");

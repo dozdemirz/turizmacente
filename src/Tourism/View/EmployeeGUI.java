@@ -142,6 +142,8 @@ public class EmployeeGUI extends JFrame {
                         }
                         loadPriceTable();
 
+
+                        //Otel silme
                         sql = "DELETE FROM hotel WHERE hotel_id = ?";
                         statement = null;
                         try {
@@ -152,10 +154,9 @@ public class EmployeeGUI extends JFrame {
                             throw new RuntimeException(ex);
                         }
 
-                        // Tabloyu güncelleme metodu
+                        // Tabloyu güncelleme
                         loadHotelModel();
 
-                        // JPopupMenu'yi kapat
                         hotelMenu.setVisible(false);
 
                         // Kullanıcıyı uyar
@@ -166,10 +167,11 @@ public class EmployeeGUI extends JFrame {
                     hotelMenu.add(addMenu);
                     hotelMenu.add(addRoomMenu);
 
-                    // Popup menüyü göster
+
                     hotelMenu.show(e.getComponent(), e.getX(), e.getY());
 
 
+                    //Otel ekleme arayüzü
                     addMenu.addActionListener(event1 -> {
                         AddHotelGUI addHotelGUI = new AddHotelGUI(id, true);
                         dispose();
@@ -177,6 +179,7 @@ public class EmployeeGUI extends JFrame {
 
                     });
 
+                    //Oda ekleme arayüzü
                     addRoomMenu.addActionListener(event1 -> {
                         AddRoomGUI addRoomGUI = new AddRoomGUI(id, false);
                         dispose();
@@ -208,6 +211,7 @@ public class EmployeeGUI extends JFrame {
         });
 
 
+        //Oda arama butonu kodları
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         btn_room_search.addActionListener(e -> {
             String place = fld_place.getText();
@@ -256,7 +260,7 @@ public class EmployeeGUI extends JFrame {
 
             if (filledFieldCount > 0) {
                 if (personNumber == null) {
-                    personNumber = 0; // personNumber null ise 0 olarak varsayalım
+                    personNumber = 0;
                 }
                 String query = Room.searchQuery(place, place, place, startDate, endDate, personNumber);
                 ArrayList<Term> filter = Term.searchTermList(query);
@@ -268,6 +272,7 @@ public class EmployeeGUI extends JFrame {
         });
 
 
+        //Oda listesi ve eklentileri
         tbl_roomlist.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -293,8 +298,9 @@ public class EmployeeGUI extends JFrame {
 
                     });
 
+                    //Oda silme
                     deleteRoom.addActionListener(event4 -> {
-                        // Sil butonuna tıklandığında
+
                         Connection connection = DBConnector.getInstance();
 
                         String sql = "DELETE FROM room WHERE room_id = ?";
@@ -308,7 +314,7 @@ public class EmployeeGUI extends JFrame {
                         }
                         loadPriceTable();
 
-                        // Tabloyu güncelleme metodu
+
                         loadPriceTable();
 
                         roomMenu.setVisible(false);
@@ -316,6 +322,7 @@ public class EmployeeGUI extends JFrame {
                         Helper.showMsg("Oda başarıyla silindi.");
                     });
 
+                    //Rezervasyona tıklandığında rezervasyon arayüzü
                     reservation.addActionListener(event3 -> {
                         ReservationGUI reservationGUI = new ReservationGUI(termID);
                         dispose();
@@ -333,6 +340,8 @@ public class EmployeeGUI extends JFrame {
             }
         });
 
+
+        //Rezervasyon listesi
         mdl_reservation_list = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -352,7 +361,7 @@ public class EmployeeGUI extends JFrame {
         tbl_reservation_list.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Sağ tıklama gerçekleştiyse
+
                 if (e.getButton() == MouseEvent.BUTTON3) {
 
 
@@ -368,7 +377,7 @@ public class EmployeeGUI extends JFrame {
 
                     deleteReservation.addActionListener(event4 -> {
 
-                        // Sil butonuna tıklandığında
+
                         Reservation.deleteReservation(reservationID);
                         loadReservationModel();
                         loadPriceTable();
