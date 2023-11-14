@@ -52,5 +52,5 @@ Proje kullanımı için aşağıdaki adımları takip edebilirsiniz:
 ## Teknik Gereksinimler
 
 - Veritabanı
-- GUI (Arayüz) tasarımı (Swing, JavaFX vb. kullanılabilir)
+- GUI (Arayüz) tasarımı (Swing)
 - Kullanıcı dostu arayüz tasarımı
